@@ -28,7 +28,7 @@ Users in Aztec will use the main account to receive notes and decrypt balances a
 
 The privacy account is the first account that is generated for an Aztec user.
 
-The private key associated with this account can be used to decrypt notes. The private key can also be used to register a distinct spending key. This allows for account abstraction by creating a separation between the key required to decrypt notes (privacy key) and the key required to spend notes (spending key). If a spending has not been registered, the account private key can be used.
+The private key associated with this account can be used to decrypt notes. The private key can also be used to register a distinct spending key. This allows for account abstraction by creating a separation between the key required to decrypt notes (privacy key) and the key required to spend notes (spending key). If a spending key has not been registered, the account private key can be used.
 
 Accounts can be identified by their alias or their public key. You can read more about aliases below. You can also find more information in the [SDK section on account keys](../sdk/usage/add-account#account-keys).
 
@@ -48,7 +48,8 @@ Read more about creating and using spending keys in the SDK docs [here](./../sdk
 
 To register a new account, you need to choose an alias and a new spending public key. Optionally, you can include a recovery account public key and a deposit.
 
-Generally, an account with a registered spending key is considered safer than account that only uses the default account keys. An account without a spending key uses a default account private key for note decryption as well as spending notes. When a spending key is registered, the default private key can only be used for decrypting notes and spending must be done with a registered spending key.
+
+Generally, an account with a registered spending key is considered safer than an account that only uses the default account keys. An account without a spending key uses default account private key for note decryption as well as spending notes. When a spending key is registered, the default private key can only be used for decrypting notes and spending must be done with a registered spending key.
 
 Most users will typically use an account with a registered spending key and are thus considered "safe". There are use cases (airdrops) where you might want to use an account that has not yet registered a spending key and is using the default account key for both note decryption and spending. So it is possible to use the system without registering your account.
 
@@ -58,7 +59,7 @@ You cannot mix the spending of these notes. You can send unspent notes from the 
 
 The SDK tries to abstract much of this complexity away and presents everything to a developer as if this notion does not exist (e.g. the account balance is the sum of all notes regardless of registered or not).
 
-If you want to know exactly what you can spend in one transaction, you have to tell the SDK whether your interested in the unregistered or registered balances.
+If you want to know exactly what you can spend in one transaction, you have to tell the SDK whether you're interested in the unregistered or registered balances.
 
 When actually creating the zero knowledge proof, the SDK infers which balance you're drawing from based on whether you give it a spending key or the account key.
 
