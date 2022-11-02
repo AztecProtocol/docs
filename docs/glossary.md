@@ -30,7 +30,7 @@ Read more about acccount recovery in the SDK docs [here](./sdk/usage/account-rec
 
 Registering an account on Aztec associates the account public key with an alias, a spending key and an optional recovery key. A recovery key must be added at registration in order to take advantage of [account recovery](#account-recovery).
 
-Read more about account registration on the [accounts page](../docs/how-aztec-works/accounts#account-registration) and in the SDK docs [here](./sdk/usage/register).
+Read more about account registration on the [accounts page](./how-aztec-works/accounts#account-registration) and in the SDK docs [here](./sdk/usage/register).
 
 ### Alias
 
