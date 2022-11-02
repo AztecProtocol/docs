@@ -50,6 +50,16 @@ Asset Ids are unique numbers that correspond to various assets in Aztec.
 
 Aztec's cryptography back-end. Refer to the graphic at the top of [this page](https://medium.com/aztec-protocol/explaining-the-network-in-aztec-network-166862b3ef7d) to see how it fits in the Aztec architecture.
 
+### Bridge Contract
+
+See [Connector Contract](#connector-contract).
+
+### Connector Contract
+
+A connector is a Layer 1 Solidity contract deployed on mainnet Ethereum that conforms a DeFi protocol to the interface the Aztec rollup expects. This allows the Aztec rollup contract to interact with the DeFi protocol via the connector.
+
+Read more about connector contracts [here](./developers/connectors).
+
 ### Falafel
 
 The Aztec client. See [Sequencer](#sequencer) for more info.

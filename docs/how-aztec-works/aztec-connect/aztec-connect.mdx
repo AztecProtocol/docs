@@ -7,7 +7,7 @@ __Dollars and Sense: Cheap Privacy with Aztec Connect__
 
 How Aztec Connect grants Ethereum cheap privacy today.
 
-For an in-depth technical explanation of how Aztec Connect bridges work, please refer to [the official GitHub repository here](https://github.com/AztecProtocol/aztec-connect-bridges).
+For an in-depth technical explanation of how Aztec Connectors work, please refer to [the official GitHub repository here](https://github.com/AztecProtocol/aztec-connect-bridges).
 
 <Image img={require('/img/aztec-bridge.png')} />
 
@@ -16,7 +16,7 @@ Aztec is laser-focused on shipping Aztec Connect, a set of tools connecting Ethe
 Aztec Connect is able to unlock private DeFi with the help of three components:
 
 1. __Layer 1 DeFi protocols__: your favorite Ethereum protocols like Lido, Element, Aave, Compound, Uniswap, and more
-2. __Aztec Connect Bridge Contracts__: an interface that enables the Aztec rollup contract to talk to Layer 1 DeFi protocols
+2. __Aztec Connector Contracts__: an interface that enables the Aztec rollup contract to talk to Layer 1 DeFi protocols
 3. __Aztec Connect SDK__: allows users to create & submit transactions to the Aztec rollup. Think of this as a crypto library for application front-ends — the zk-equivalent of ethers.js, which lets users send transactions to Ethereum nodes via their favorite applications.
 
 The Aztec Connect toolkit essentially functions [like a proxy service](https://medium.com/aztec-protocol/private-defi-with-the-aztec-connect-bridge-76c3da76d982) for DeFi— allowing anyone to deposit into Aztec's system, interact with Ethereum DeFi, and rely on the trusted contracts, liquidity, and execution of Layer 1, while also adding cheap privacy.
@@ -25,7 +25,7 @@ The Aztec Connect toolkit essentially functions [like a proxy service](https://m
 Aztec Connect relies on Layer 1 for transaction execution, using DeFi batching to achieve cost savings. These design decisions represent serious benefits to our partners:
 
 - No additional audits; no redeployment of core contracts
-- Simple ~100–200 line Bridge Contract interfaces to enable cost savings
+- Simple ~100–200 line Connector Contract interfaces to enable cost savings
 - Retention of Layer 1 liquidity and composability
 
 This last point bears repeating: unlike alt-L1 EVM implementations or L2's with their own execution environment, Aztec Connect allows developers to gain access to cheap privacy today, retaining composability with other protocols.

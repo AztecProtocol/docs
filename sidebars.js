@@ -63,7 +63,7 @@ const sidebars = {
       items: [
         'developers/getting-started',
         'developers/cli',
-        'developers/bridges',
+        'developers/connectors',
         'developers/noir',
         'developers/mainnet-info'
       ]
@@ -75,12 +75,6 @@ const sidebars = {
     //     type: 'generated-index',
     //   },
     //   items: [
-    //     'guides/overview',
-    //     'guides/wallet-support',
-    //     'guides/create-bridge',
-    //     'guides/element-review',
-    //     'guides/lido-review',
-    //     'guides/goerli-testing',
     //   ],
     // },
     {

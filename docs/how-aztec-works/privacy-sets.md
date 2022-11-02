@@ -8,13 +8,13 @@ Today we’re exploring why a private network is endlessly more private than sim
 
 Just like mixers, Aztec offers basic deposits and withdrawals — meant to break the link between a sending address and receiving address: our current private payments front-end zk.money has been live on mainnet since March and recently crossed 4,800 ETH in deposits bridged.
 
-But zk.money also offers private internal transfers and will soon offer a full suite of Ethereum Layer 1 Defi functionality enabled by our bridge, Aztec Connect.
+But zk.money also offers private internal transfers and will soon offer a full suite of Ethereum Layer 1 Defi functionality enabled by our Ethereum connector, Aztec Connect.
 
 The addition of these anonymizing activities means Aztec will offer a large and dynamic privacy set that will become increasingly more difficult to de-anonymize —a concept we like to call Infinite Privacy.
 
 ## The Infinite City
 
-Imagine Aztec as a walled city. All an outside observer can see is users entering and leaving Aztec via our bridge.
+Imagine Aztec as a walled city. All an outside observer can see is users entering and leaving Aztec via our Ethereum connector.
 
 Within the walls of the city, users can exchange assets with fully private transactions. Neither the network nor its participants can see the senders and recipients of transactions, nor their amounts.
 
@@ -110,7 +110,7 @@ So in this case, you could be some combination of internal transactions summing 
 
 Of course, as the number of internal transfers needed to sum to a withdrawal amount increases, the less likely it actually happened — realistically, who’s going to coordinate 1,000 unaffiliated addresses to privately send them funds!
 
-That’s why the internal economy of Aztec matters, and why Aztec Connect — a bridge allowing anyone to interact with defi contracts on Layer 1 — will help explode the anonymity set, making it highly improbable to associate any deposits with withdrawals.
+That’s why the internal economy of Aztec matters, and why Aztec Connect — a connector allowing anyone to interact with defi contracts on Layer 1 — will help explode the anonymity set, making it highly improbable to associate any deposits with withdrawals.
 
 Internal transfers muddy up anonymity set calculations, but only if there are a sufficient number of internal transfers and a large enough quantity of deposits in the system.
 
@@ -122,7 +122,7 @@ That means to begin with, any Layer 1 Defi functionality will be available to Az
 
 Deposit $ETH on zk.money? On a mixer, you’d have to wait for the funds to be “seasoned” before withdrawal— essentially waiting for the privacy set to grow before withdrawing funds. That’s why for instance there are billions sitting in privacy mixers.
 
-Using Aztec Connect, you can bridge funds back to Layer 1 and make shielded assets productive while you wait — meaning you might not want to ever withdraw!
+Using Aztec Connect, you can send funds back to Layer 1 and make shielded assets productive while you wait — meaning you might not want to ever withdraw!
 
 With a simple conventional privacy mixer, you deposit funds and simply wait — for what, you ask? For the anonymity set to grow! Meanwhile, deposited funds are completely unproductive. Capital efficiency, schmapital efficiency.
 

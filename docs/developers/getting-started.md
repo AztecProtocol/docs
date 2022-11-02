@@ -7,7 +7,7 @@ title: Getting Started
 There are two common ways that developers can start building on Aztec:
 
 1. Build a user-facing application that connects to the Aztec network via the TypeScript SDK.
-2. Build an Aztec Connect bridge that connects the Aztec network to Ethereum smart contracts.
+2. Build an Aztec Connector contract that connects the Aztec network to Ethereum smart contracts.
 
 We are also working on Noir, a domain specific language that can be used to develop ZK-provable programs. Scroll down for more details.
 
@@ -48,17 +48,17 @@ The testnet doesn't have a block explorer at the moment. A simple way to deploy 
 
 For the status and details of the Aztec Testnet infrastructure, check the [Testnet Falafel Status API](https://api.aztec.network/aztec-connect-testnet/falafel/status).
 
-### Deployed Aztec Connect Bridges
+### Deployed Aztec Connector contracts
 
-If you are developing with the SDK / on multi-step bridges that involve interaction with other existing bridges, you may come across the need to retrieve details of bridges already deployed on the Testnet (e.g. `bridgeAddressId`). There are currently two ways to do so:
+If you are developing with the SDK / on multi-step connectors that involve interaction with other existing connectors, you may come across the need to retrieve details of connectors already deployed on the Testnet (e.g. `bridgeAddressId`). There are currently two ways to do so:
 
 #### Aztec Frontend Boilerplate
 
-After logging in on the [Minimal Frontend](https://aztec-frontend-boilerplate.netlify.app/), you will see a "Log Bridges" button which logs bridge details in the browser console.
+After logging in on the [Minimal Frontend](https://aztec-frontend-boilerplate.netlify.app/), you will see a "Log Bridges" button which logs connector details in the browser console.
 
 #### Foundry Script
 
-Alternatively, you can read from the bridge data provider contract directly by running a script from the [Aztec Connect Bridges repository](https://github.com/AztecProtocol/aztec-connect-bridges). Check [this section](./bridges#testnet-deployment-info) for more details.
+Alternatively, you can read from the connector data provider contract directly by running a script from the [Aztec Connector contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges). Check [this section](./bridges#testnet-deployment-info) for more details.
 
 ## Building with the SDK
 
@@ -102,18 +102,18 @@ By default, Aztec transactions could take up to a few hours to settle on the Tes
 - [🔍 Testnet Block Explorer](https://aztec-connect-testnet-explorer.aztec.network/)
 - [🔍 Testnet Falafel Status API](https://api.aztec.network/aztec-connect-testnet/falafel/status)
 
-## Building an Aztec Connect Bridge Contract
+## Building an Aztec Connector Contract
 
-The [Aztec Connect Bridges page](./bridges) covers how to develop an Aztec Connect Bridge in great detail.
+The [Aztec Connector Contracts page](./connectors) covers how to develop an Aztec Connector contract in great detail.
 
-The [Aztec Connect Bridges repository](https://github.com/AztecProtocol/aztec-connect-bridges) has the most up to date information and materials for creating a bridge contract.
+The [Aztec Connector Contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges) has the most up to date information and materials for creating a connector contract.
 
 ### Bridges Resources
 
-- [🧑‍💻 Aztec Connect Bridges GitHub Repo](https://github.com/AztecProtocol/aztec-connect-bridges)
-- [🎥 ETHBogota Workshop - Aztec Connect Bridges](https://www.youtube.com/watch?v=I5M8LhOECpM&t=1826s)
-- [✍️ Getting Started with Aztec Connect Bridges](./bridges.md)
-- [✍️ Element Bridge Explained](https://hackmd.io/@aztec-network/SJ7-6Rbfq)
+- [🧑‍💻 Aztec Connector Contract GitHub Repo](https://github.com/AztecProtocol/aztec-connect-bridges)
+- [🎥 ETHBogota Workshop - Aztec Connector Contracts](https://www.youtube.com/watch?v=I5M8LhOECpM&t=1826s)
+- [✍️ Getting Started with Aztec Connector Contracts](./connectors.md)
+- [✍️ Element Connector Contract Explained](https://hackmd.io/@aztec-network/SJ7-6Rbfq)
 
 ## Building in Noir
 
@@ -137,7 +137,7 @@ The [Noir page](./noir) covers how to install and develop in Noir in great detai
 
 Join [Aztec Discord](https://discord.gg/aztec) for discussions across channels:
 
-- [`#💻│aztec-connect`](https://discord.com/channels/563037431604183070/563038059826774017) for SDK & Bridges
+- [`#💻│aztec-connect`](https://discord.com/channels/563037431604183070/563038059826774017) for SDK & connectors
 - [`#🖤│noir`](https://discord.com/channels/563037431604183070/824700393677783080) for Noir
 - [`#🇨🇴│ethbogota`](https://discord.com/channels/563037431604183070/1021410163221086268) for the ETHBogota Hackathon
 
@@ -149,5 +149,5 @@ All questions, comments, suggestions, ideas, etc. welcome.
 | ----- | ---------------------------------- | ---------------- | ------------ | --------------------------------------------------- | ----------------------- |
 | Josh  | Developer Relations                | joshc#6779       | @crites      | [@critesjosh\_](https://twitter.com/critesjosh_)    | josh@aztecprotocol.com  |
 | Savio | Developer Relations                | Globallager#4834 | @Globallager | [@globallager](https://twitter.com/globallager)     | savio@aztecprotocol.com |
-| Lasse | Engineer - Bridge & Smart Contract | LHerskind#8376   |              | [@HerskindLasse](https://twitter.com/herskindlasse) | lasse@aztecprotocol.com |
+| Lasse | Engineer - Connectors & Smart Contract | LHerskind#8376   |              | [@HerskindLasse](https://twitter.com/herskindlasse) | lasse@aztecprotocol.com |
 | Maxim | Engineer - Noir                    | vezzie#7609      |              | [@maximvezenov](https://twitter.com/maximvezenov)   | maxim@aztecprotocol.com |

@@ -2,17 +2,31 @@
 title: Technical Introduction
 ---
 
-This page is taken from the [Aztec Connect Bridges repository](https://github.com/AztecProtocol/aztec-connect-bridges) README on Github.
+This page is taken from the [Aztec Connector Contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges) README on Github.
+
+:::tip
+
+**Connector contracts** and **Bridge contracts** are the same thing and the terms are used interchangeably.
+
+:::
+
+:::note
+
+Aztec Connector Contracts used to be called Bridge contracts. The name has been updated to reduce confusion around the contract behavior. The contracts are not bridging between separate blockchains as is often the case when referring to a bridge.
+
+References to bridges have been updated in the documentation and relevant READMEs, but not in the source code.
+
+:::
 
 ### What is Aztec?
 
-Aztec is a privacy focussed L2, that enables cheap private interactions with Layer 1 smart contracts and liquidity, via a process called DeFi Aggregation. We use advanced zero-knowledge technology "zk-zk rollups" to add privacy and significant gas savings any Layer 1 protocol via Aztec Connect bridges.
+Aztec is a privacy focussed L2, that enables cheap private interactions with Layer 1 smart contracts and liquidity, via a process called DeFi Aggregation. We use advanced zero-knowledge technology "zk-zk rollups" to add privacy and significant gas savings any Layer 1 protocol via Aztec Connector contracts.
 
-#### What is a bridge?
+#### What is a connector?
 
-A bridge is a Layer 1 Solidity contract deployed on mainnet that conforms a DeFi protocol to the interface the Aztec rollup expects. This allows the Aztec rollup contract to interact with the DeFi protocol via the bridge.
+A connector is a Layer 1 Solidity contract deployed on mainnet Ethereum that conforms a DeFi protocol to the interface the Aztec rollup expects. This allows the Aztec rollup contract to interact with the DeFi protocol via the connector.
 
-A bridge contract models any Layer 1 DeFi protocol as an asynchronous asset swap. You can specify up to two input assets and two output assets per bridge.
+A connector contract models any Layer 1 DeFi protocol as an asynchronous asset swap. You can specify up to two input assets and two output assets per Connector.
 
 #### How does this work?
 
@@ -24,27 +38,27 @@ Rollup providers batch multiple L2 transaction intents on the Aztec Network toge
 
 Aztec Connect transactions can be batched together into one rollup. Each user in the batch pays a base fee to cover the verification of the rollup proof and their share of the L1 DeFi transaction gas cost. A single Aztec Connect transaction requires 3 base fees or approximately ~8000 gas.
 
-The user then pays their share of the L1 Defi transaction. The rollup will call a bridge contract with a fixed deterministic amount of gas so the total fee is simple ~8000 gas + BRIDGE_GAS / BATCH_SIZE.
+The user then pays their share of the L1 Defi transaction. The rollup will call a Connector contract with a fixed deterministic amount of gas so the total fee is simple ~8000 gas + BRIDGE_GAS / BATCH_SIZE.
 
 #### What is private?
 
-The source of funds for any Aztec Connect transaction is an Aztec shielded asset. When a user interacts with an Aztec Connect Bridge contract, their identity is kept hidden, but balances sent to the bridge are public.
+The source of funds for any Aztec Connect transaction is an Aztec shielded asset. When a user interacts with an Aztec Connector contract, their identity is kept hidden, but balances sent to the Connector are public.
 
 #### Batching
 
-Rollup providers are incentivised to batch any transaction with the same `bridgeId`. This reduces the cost of the L1 transaction for similar trades. A `bridgeId` consits of:
+Rollup providers are incentivised to batch any transaction with the same `bridgeId`. This reduces the cost of the L1 transaction for similar trades. A `bridgeId` consists of:
 
 ## Virtual Assets
 
-Aztec uses the concept of Virtual Assets or Position tokens to represent a share of assets held by a Bridge contract. This is far more gas efficient than minting ERC20 tokens. These are used when the bridge holds an asset that Aztec doesn't support (e.g. Uniswap Position NFT's or other non-fungible assets).
+Aztec uses the concept of Virtual Assets or Position tokens to represent a share of assets held by a connector contract. This is far more gas efficient than minting ERC20 tokens. These are used when the connector holds an asset that Aztec doesn't support (e.g. Uniswap Position NFT's or other non-fungible assets).
 
-If the output asset of any interaction is specified as "VIRTUAL", the user will receive encrypted notes on Aztec representing their share of the position, but no tokens or ETH need to be transfered. The position tokens have an `assetId` that is the `interactionNonce` of the DeFi Bridge call. This is globably unique. Virtual assets can be used to construct complex flows, such as entering or exiting LP positions (e.g. one bridge contract can have multiple flows which are triggered using different input assets).
+If the output asset of any interaction is specified as "VIRTUAL", the user will receive encrypted notes on Aztec representing their share of the position, but no tokens or ETH need to be transfered. The position tokens have an `assetId` that is the `interactionNonce` of the DeFi connector call. This is globably unique. Virtual assets can be used to construct complex flows, such as entering or exiting LP positions (e.g. one connector contract can have multiple flows which are triggered using different input assets).
 
 ## Aux Input Data
 
-The `auxData` field can be used to provide data to the bridge contract, such as slippage, tokenIds etc.
+The `auxData` field can be used to provide data to the connector contract, such as slippage, tokenIds etc.
 
-### Bridge Contract Interface
+### Connector Contract Interface
 
 ```ts
 // SPDX-License-Identifier: GPL-2.0-only
@@ -98,12 +112,12 @@ interface IDefiBridge {
     if there are two input assets, equal amounts of both assets will have been input
   @param uint256 interactionNonce a globally unique identifier for this DeFi interaction.
     This is used as the assetId if one of the output assets is virtual
-  @param uint64 auxData other data to be passed into the bridge contract (slippage / nftID etc)
+  @param uint64 auxData other data to be passed into the connector contract (slippage / nftID etc)
   @return uint256 outputValueA the amount of outputAssetA returned from this interaction,
     should be 0 if async
   @return uint256 outputValueB the amount of outputAssetB returned from this interaction, 
-    should be 0 if async or bridge only returns 1 asset.
-  @return bool isAsync a flag to toggle if this bridge interaction will return assets 
+    should be 0 if async or connector only returns 1 asset.
+  @return bool isAsync a flag to toggle if this connector interaction will return assets 
     at a later date after some third party contract has interacted with it via finalise()
   */
   function convert(
@@ -134,7 +148,7 @@ interface IDefiBridge {
     this will always be set
   @param AztecAsset outputAssetB a struct detailing an optional second output asset
   @param uint256 interactionNonce
-  @param uint64 auxData other data to be passed into the bridge contract (slippage / nftID etc)
+  @param uint64 auxData other data to be passed into the connector contract (slippage / nftID etc)
   @return uint256 outputValueA the return value of output asset A
   @return uint256 outputValueB optional return value of output asset B
   @dev this function should have a modifier on it to ensure 
@@ -154,7 +168,7 @@ interface IDefiBridge {
 
 ### Async flow explainer
 
-If a Defi Bridge interaction is asynchronous, it must be finalised at a later date once the DeFi interaction has completed.
+If a Defi connector interaction is asynchronous, it must be finalised at a later date once the DeFi interaction has completed.
 
 This is acheived by calling `RollupProcessor.processAsyncDefiInteraction(uint256 interactionNonce)`. This internally will call `finalise` and ensure the correct amount of tokens have been transferred.
 
@@ -165,7 +179,7 @@ This function is called from the Aztec Rollup Contract via the DeFi Bridge Proxy
 This function should interact with the DeFi protocol (e.g Uniswap) and transfer tokens or ETH back to the Aztec Rollup Contract. The Rollup contract will check if it received the correct amount.
 
 
-At a later date, this interaction can be finalised by prodding the rollup contract to call `finalise` on the bridge.
+At a later date, this interaction can be finalised by prodding the rollup contract to call `finalise` on the connector.
 
 #### finalise()
 
