@@ -12,7 +12,7 @@ This page is taken from the [Aztec Connector Contracts repository](https://githu
 
 :::note
 
-Aztec Connector Contracts used to be called Bridge contracts. The name has been updated to reduce confusion around the contract behavior. The contracts are not bridging between separate blockchains as is often the case when referring to a bridge.
+Aztec Connector contracts used to be called Bridge contracts. The name has been updated to reduce confusion around the contract behavior. The contracts are not bridging between separate blockchains as is often the case when referring to a bridge.
 
 References to bridges have been updated in the documentation and relevant READMEs, but not in the source code.
 

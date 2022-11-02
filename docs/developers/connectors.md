@@ -12,7 +12,7 @@ This guide is intended for readers interested in developing Aztec Connector cont
 
 :::note
 
-Aztec Connector Contracts used to be called Bridge contracts. The name has been updated to reduce confusion around the contract behavior. The contracts are not bridging between separate blockchains as is often the case when referring to a bridge.
+Aztec Connector contracts used to be called Bridge contracts. The name has been updated to reduce confusion around the contract behavior. The contracts are not bridging between separate blockchains as is often the case when referring to a bridge.
 
 References to bridges have been updated in the documentation and relevant READMEs, but not in the source code.
 
@@ -66,7 +66,7 @@ We recommend [Foundry](https://book.getfoundry.sh/) given the interconnected nat
     
 To get started with an example setup, follow the steps below:
     
-1. Fork the [Aztec Connector Contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges).
+1. Fork the [Aztec Connector contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges).
 
 2. Clone your fork:
     
