@@ -58,7 +58,7 @@ After logging in on the [Minimal Frontend](https://aztec-frontend-boilerplate.ne
 
 #### Foundry Script
 
-Alternatively, you can read from the connector data provider contract directly by running a script from the [Aztec Connector contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges). Check [this section](./bridges#testnet-deployment-info) for more details.
+Alternatively, you can read from the connector data provider contract directly by running a script from the [Aztec Connector contracts repository](https://github.com/AztecProtocol/aztec-connect-bridges). Check [this section](./connectors#testnet-deployment-info) for more details.
 
 ## Building with the SDK
 
