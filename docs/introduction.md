@@ -4,6 +4,8 @@ title: Introduction
 slug: '/'
 ---
 
+test
+
 [Aztec Network](https://aztec.network/) is the first private [ZK-rollup](https://ethereum.org/en/developers/docs/scaling/zk-rollups/) on [Ethereum](https://ethereum.org/), enabling decentralized applications to access privacy and scale. Aztec’s rollup is secured by its industry-standard [PLONK](https://cryptocurrencywiki.org/PLONK) proving mechanism used by the leading zero-knowledge scaling projects.
 
 At Aztec we believe decentralization is premised on individual rights. Without widely accessible privacy, we compromise our ability to choose how we live our lives and earn our livelihoods.
