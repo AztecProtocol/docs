@@ -42,6 +42,17 @@ if (PRIVATE_KEY) {
 
 ## SDK setup
 
+### For Apps
+
+```typescript
+const serverUrl = "https://wallet.aztec.newtork";
+const aztecWalletProvider = new IframeAztecWalletProvider(serverUrl);
+await aztecWalletProvider.connect();
+
+const aztecSdk = createAztecSdk();
+await aztecSdk.addAccount(aztecWalletProvider);
+```
+
 Once the provider is set up you can create an instance of the Aztec SDK, specifying the rollup host. When working on mainnet fork testnet, the corresponding sequencer endpoint is:
 
 ```shell
@@ -69,7 +80,41 @@ const setupSdk = async () => {
     }
 
     await sdk.run();
+    await sdk.awaitSynchronised();
 };
+```
+
+### AztecWalletProvider
+
+Once the SDK is set up, you can create an Aztec wallet provider that manages access to the user's account and signing keys.
+
+The `ConstantKeystore` is created with the account and spending `KeyPairs` for a given account, as well as an optional set of `Permission`s.
+
+```typescript
+interface KeyPair {
+  getPublicKey(): GrumpkinAddress;
+  getPrivateKey(): Promise<Buffer>;
+  signMessage(message: Buffer): Promise<SchnorrSignature>;
+}
+
+interface Permission {
+  assets: number[];
+}
+```
+
+```typescript
+const aztecWalletProvider = await sdk.createAztecWalletProvider(
+    new ConstantKeystore(accountKeys, spendingKeys, permissions)
+);
+aztecWalletProvider.connect();
+```
+
+### Legacy Keys
+
+```typescript
+const address = EthAddress.fromString("0x...");
+const keyStore = sdk.createLegacyKeyStore(address, registered);
+const aztecWalletProvider = await sdk.createAztecWalletProvider(keyStore);
 ```
 
 ### Debug
