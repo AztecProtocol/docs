@@ -32,7 +32,7 @@ You need to set up a connection to an Ethereum network and import a private key.
 import { JsonRpcProvider, AztecSdk, createAztecSdk, WalletProvider } from '@aztec/sdk';
 ```
 
-```ts title="/src/latest/index.ts"
+```ts
 const ethereumProvider = new JsonRpcProvider(ETHEREUM_HOST);
 const walletProvider = new WalletProvider(ethereumProvider);
 if (PRIVATE_KEY) {
@@ -71,12 +71,12 @@ const setupSdk = async () => {
         serverUrl: "https://api.aztec.network/aztec-connect-testnet/falafel", // testnet
         memoryDb: true,            // set to false to save data
         minConfirmation: 1,        // ETH block confirmations
+        debug: 'bb:*',             // debug
     });
 
     if (PRIVATE_KEY) {
-        const keyStore = sdk.createLegacyKeyStore(address, registered);
-        const aztecWalletProvider = await sdk.createAztecWalletProvider(keyStore);
-        await sdk.addAccount(aztecWalletProvider);
+      const aztecWalletProvider = await createAztecWalletProviderFromAddress(sdk, walletProvider.getAccount(0));
+      await sdk.addAccount(aztecWalletProvider);
     }
 
     await sdk.run();
