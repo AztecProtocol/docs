@@ -29,7 +29,7 @@ A bridge contract models any L1 Protocol as an asset swap. Up to two input asset
 
 > **Note:** Assets A and B shall be of identical amounts (but not necessarily of identical types) in the current design to avoid free-riders. Further research to lift the limitation is underway.
 
-The asset swap delay depends on whether the bridge is designed to be synchronous or asynchronous. For more information on synchronicity, check the [Sync vs Async](#Sync-vs-Async) section.
+The asset swap delay depends on whether the bridge is designed to be synchronous or asynchronous. For more information on synchronicity, check the [Sync vs Async](#sync-vs-async) section.
 
 A high-level look of the Lido-Curve bridge that swaps users' ETH into wstETH:
 
