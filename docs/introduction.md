@@ -30,7 +30,7 @@ The Aztec peer-to-peer network receives these proofs, and an Aztec network [sequ
 
 The aggregation proof is sent to a smart contract on Ethereum for validation. If the proofs are verified as correct by the smart contract, it will record the new state of the Aztec blockchain as a ledger entry on Ethereum.
 
-Updates to this state can only occur based on proving the correct execution of a block of Aztec transactions. This allows Aztec 3 to rely on Ethereum's consensus for the correct record of events.The Aztec execution environment can be thought of as an extension of Ethereum, but where a subset of transactions can be encrypted.
+Updates to this state can only occur based on proving the correct execution of a block of Aztec transactions. This allows Aztec 3 to rely on Ethereum's consensus for the correct record of events. The Aztec execution environment can be thought of as an extension of Ethereum, but where a subset of transactions can be encrypted.
 
 ```mermaid
 flowchart BT
