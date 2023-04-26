@@ -14,12 +14,12 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   docsSidebar: [
-    "intro", // Mike to review
+    "intro",
     {
       type: 'category',
       label: 'Aztec 3',
       items: [
-        'aztec3/overview', // Mike to review
+        'aztec3/overview',
         'aztec3/history',
         {
           type: 'category',
@@ -34,8 +34,33 @@ const sidebars = {
           type: 'category',
           label: 'Architecture',
           items: [
-            `aztec3/architecture/architecture`, // Mike to review
-            // 'aztec3/architecture/components', // TODO
+            'aztec3/architecture/architecture',
+            {
+              type: 'category',
+              label: 'Components',
+              items: [
+                'aztec3/architecture/components/components',
+                'aztec3/architecture/components/acir-simulator',
+                'aztec3/architecture/components/archiver',
+                'aztec3/architecture/components/aztec-node',
+                'aztec3/architecture/components/aztec-rpc',
+                'aztec3/architecture/components/barretenberg.js',
+                'aztec3/architecture/components/circuits.js',
+                'aztec3/architecture/components/circuits',
+                'aztec3/architecture/components/end-to-end',
+                'aztec3/architecture/components/ethereum.js',
+                'aztec3/architecture/components/foundation',
+                'aztec3/architecture/components/kernel-prover',
+                'aztec3/architecture/components/key-store',
+                'aztec3/architecture/components/l1-contracts',
+                'aztec3/architecture/components/merkle-tree',
+                'aztec3/architecture/components/noir-contracts',
+                'aztec3/architecture/components/p2p',
+                'aztec3/architecture/components/prover-client',
+                'aztec3/architecture/components/sequencer-client',
+                'aztec3/architecture/components/world-state',
+              ]
+            },
           ]
         },
         {
@@ -50,9 +75,9 @@ const sidebars = {
                 'aztec3/protocol/trees/indexed-merkle-tree',
               ]
             },
+            'aztec3/protocol/circuits',
             'aztec3/protocol/contract-creation',
-            'aztec3/protocol/function-selectors', // Consider moving to discourse.
-            // 'aztec3/protocol/notes-and-nullifiers', // TODO
+            'aztec3/protocol/notes-and-nullifiers',
             'aztec3/protocol/communication-abstractions',
             'aztec3/protocol/public-functions-vm-architectures'
           ]
