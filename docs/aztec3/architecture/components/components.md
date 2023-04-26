@@ -10,7 +10,7 @@ We are building Aztec 3 as transparently as we can. The documents published here
 If you would like to help us build Aztec 3, consider reviewing our [GitHub](https://github.com/AztecProtocol) to contribute code and joining our [forum](https://discourse.aztec.network/) to participate in discussions.
 :::
 
-See [here](../milestones/milestones.md) for draft milestones.
+See [here](../../milestones/milestones.md) for draft milestones.
 
 See [here](https://miro.com/app/board/uXjVMQbDwNk=/?share_link_id=47681418582) for a gigantic sequence / class diagram (readonly) showing our current progress.
 
