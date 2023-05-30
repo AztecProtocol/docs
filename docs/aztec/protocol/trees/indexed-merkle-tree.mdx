@@ -13,12 +13,14 @@ import Disclaimer from "../../common/_disclaimer.mdx";
 Currently the only feasible way to get privacy in public blockchains is via a UTXO model. In this model, state is stored in encrypted UTXO's in merkle trees. However, to maintain privacy, state can not be updated. The very act of performing an update leaks information. In order to simulate "updating" the state, we "destroy" old UTXO's and create new ones for each state update. Resulting in a merkle tree that is append-only.
 
 A classic merkle tree:
-![](https://hackmd.io/_uploads/Bkp8a5fKF.png)
+
+<Image img={require("/img/indexed-merkle-tree/normal-merkle-tree.png")} />
 
 To destroy state, the concept of a "nullifier" tree is introduced. Typically represented as a sparse Merkle Tree, the structure is utilized to store notes deterministically linked to values in the append-only tree of encrypted notes.
 
 A sparse merkle tree (not every leaf stores a value):
-![](https://hackmd.io/_uploads/Sk8ntwJiO.png)
+
+<Image img={require("/img/indexed-merkle-tree/sparse-merkle-tree.png")} />
 
 In order to spend / modify a note in the private state tree, one must create a nullifier for it, and prove that the nullifier does not already exist in the nullifier tree. As nullifier trees are modelled as sparse merkle trees, non membership checks are (conceptually) trivial.
 
