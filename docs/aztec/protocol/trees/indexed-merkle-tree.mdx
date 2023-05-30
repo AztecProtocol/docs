@@ -25,7 +25,7 @@ A sparse merkle tree (not every leaf stores a value):
 
 In order to spend / modify a note in the private state tree, one must create a nullifier for it, and prove that the nullifier does not already exist in the nullifier tree. As nullifier trees are modelled as sparse merkle trees, non membership checks are (conceptually) trivial.
 
-Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain $2^256$ values and want to prove non membership of the value $2^128$. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] = 2^{128}$ I can prove that the item exists.
+Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain $2^{256}$ values and want to prove non membership of the value $2^{128}$. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] = 2^{128}$ I can prove that the item exists.
 
 ## Problems introduced by using Sparse Merkle Trees for Nullifier Trees
 
@@ -54,11 +54,11 @@ The insertion protocol is described below:
 1. Look for a nullifier's corresponding low*nullifier, where $low_nullifier*{\textsf{next_value}} > v$.
 2. Perform membership check of the low nullifier.
 3. Perform a range check on the low nullifier's value and next*value fields:
-   $new_nullifier > low_nullifier*{\textsf{value}}$ && ( $new\_nullifier <  low\_nullifier_{\textsf{next_value}}$ || $low\_nullifier_{\textsf{next_value}} == 0$ )
+   $new_nullifier > low_nullifier*{\textsf{value}}$ && ( $new\_nullifier <  low\_nullifier_{\textsf{next\_value}}$ || $low\_nullifier_{\textsf{next\_value}} == 0$ )
 4. Update the low nullifier pointers
 
-- $low\_nullifier_{\textsf{next_index}} = new\_insertion\_index$
-- $low\_nullifier_{\textsf{next_value}} = new\_nullifier$
+- $low\_nullifier_{\textsf{next\_index}} = new\_insertion\_index$
+- $low\_nullifier_{\textsf{next\_value}} = new\_nullifier$
 
 5. Perform insertion of new updated low nullifier (yields new root)
 6. Update pointers on new leaf
@@ -77,7 +77,7 @@ The insertion protocol is described below:
 - A handful of equality constraints.
 
 **Special cases**
-You'll notice at step 3 the $low\_nullifier_{\textsf{next_value}}$ can be 0. This is a special case as if a value is the max, it will not point to anything larger (as it does not exist). Instead it points to zero. By doing so we close the loop, so we are always inserting into a ring, if we could insert outside the ring we could cause a split.
+You'll notice at step 3 the $low\_nullifier_{\textsf{next\_value}}$ can be 0. This is a special case as if a value is the max, it will not point to anything larger (as it does not exist). Instead it points to zero. By doing so we close the loop, so we are always inserting into a ring, if we could insert outside the ring we could cause a split.
 
 A visual aid for insertion is presented below:
 
