@@ -9,7 +9,8 @@ import Disclaimer from "../../common/_disclaimer.mdx";
 
 # Indexed Merkle Trees
 
-**Primer on Nullifier Trees**
+#### Primer on Nullifier Trees
+
 Currently the only feasible way to get privacy in public blockchains is via a UTXO model. In this model, state is stored in encrypted UTXO's in merkle trees. However, to maintain privacy, state can not be updated. The very act of performing an update leaks information. In order to simulate "updating" the state, we "destroy" old UTXO's and create new ones for each state update. Resulting in a merkle tree that is append-only.
 
 A classic merkle tree:
@@ -24,7 +25,7 @@ A sparse merkle tree (not every leaf stores a value):
 
 In order to spend / modify a note in the private state tree, one must create a nullifier for it, and prove that the nullifier does not already exist in the nullifier tree. As nullifier trees are modelled as sparse merkle trees, non membership checks are (conceptually) trivial.
 
-Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain 2^256 values and want to prove non membership of the value 2^128. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] = 2^{128}$ I can prove that the item exists.
+Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain $2^256$ values and want to prove non membership of the value $2^128$. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] = 2^{128}$ I can prove that the item exists.
 
 ## Problems introduced by using Sparse Merkle Trees for Nullifier Trees
 
@@ -64,7 +65,7 @@ The insertion protocol is described below:
 
 - $new\_nullifier\_leaf_{\textsf{value}} = new\_nullifier$
 - $new\_nullifier\_leaf.next\_value = low\_nullifier.next\_value$ (from before update in step 4)
-- $new\_nullifier\_leaf_{\textsf{next_index}} = low\_nullifier_{\textsf{next_index}}$ (from before update in step 4)
+- $new\_nullifier\_leaf_{\textsf{next\_index}} = low\_nullifier_{\textsf{next\_index}}$ (from before update in step 4)
 
 7. Perform insertion of new leaf (yields new root)
 
@@ -161,7 +162,8 @@ In the following example we insert a subtree of size 4 into our tree at step 4. 
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-7.png")} />
 
-**Performance gains from subtree insertion**
+#### Performance gains from subtree insertion
+
 Lets go back over the numbers:
 Insertions into a sparse nullifier tree involve 1 non membership check (254 hashes) and 1 insertion (254 hashes). If we were performing insertion for 4 values that would entail 2032 hashes.
 In the depth 32 indexed tree construction, each subtree insertion costs 1 non membership check (32 hashes), 1 pointer update (32 hashes) for each value as well as the cost of constructing and inserting a subtree (~67 hashes. Which is 327 hashes, an incredible efficiency increase.)
@@ -174,8 +176,8 @@ Some fun engineering problems occur when we inserting a subtree in circuits when
 
 **Circuit Inputs**
 
-- `new_nullifiers`: fr[]
-- `low_nullifier_leaf_preimages`: tuple of {value: fr, next_index: fr, next_value: fr}
+- `new_nullifiers`: `fr[]`
+- `low_nullifier_leaf_preimages`: `tuple of {value: fr, next_index: fr, next_value: fr}`
 - `low_nullifier_membership_witnesses`: A sibling path and a leaf index of low nullifier
 - `current_nullifier_tree_root`: Current root of the nullifier tree
 - `next_insertion_index`: fr, the tip our nullifier tree
