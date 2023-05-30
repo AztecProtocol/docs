@@ -185,18 +185,18 @@ Pseudocode:
 
 ```cpp
 
-let empty_subtree_hash = SOME_CONSTANT_EMPTY_SUBTREE;
-let pending_insertion_subtree = [];
-let insertion_index = inputs.next_insertion_index;
-let root = inputs.current_nullifier_tree_root;
+auto empty_subtree_hash = SOME_CONSTANT_EMPTY_SUBTREE;
+auto pending_insertion_subtree = [];
+auto insertion_index = inputs.next_insertion_index;
+auto root = inputs.current_nullifier_tree_root;
 
 // Check nothing exists where we would insert our subtree
 assert(membership_check(root, empty_subtree_hash, insertion_index >> subtree_depth, inputs.subtree_insertion_sibling_path));
 
 for (i in len(new_nullifiers)) {
-    let new_nullifier = inputs.new_nullifiers[i];
-    let low_nullifier_leaf_preimage = inputs.low_nullifier_leaf_preimages[i];
-    let low_nullifier_membership_witness = inputs.low_nullifier_membership_witnesses[i];
+    auto new_nullifier = inputs.new_nullifiers[i];
+    auto low_nullifier_leaf_preimage = inputs.low_nullifier_leaf_preimages[i];
+    auto low_nullifier_membership_witness = inputs.low_nullifier_membership_witnesses[i];
 
     // Membership check for low nullifier
     assert(perform_membership_check(root, hash(low_nullifier_leaf_preimage), low_nullifier_membership_witness));
@@ -206,7 +206,7 @@ for (i in len(new_nullifiers)) {
     assert(new_nullifier > low_nullifier_leaf_preimage.value);
 
     // Update new nullifier pointers
-    let new_nullifier_leaf = {
+    auto new_nullifier_leaf = {
         .value = new_nullifier,
         .next_index = low_nullifier_preimage.next_index,
         .next_value = low_nullifier_preimage.next_value
@@ -240,25 +240,25 @@ The updated pseudocode is as follows:
 
 ```cpp
 
-let empty_subtree_hash = SOME_CONSTANT_EMPTY_SUBTREE;
-let pending_insertion_subtree = [];
-let insertion_index = inputs.next_insertion_index;
-let root = inputs.current_nullifier_tree_root;
+auto empty_subtree_hash = SOME_CONSTANT_EMPTY_SUBTREE;
+auto pending_insertion_subtree = [];
+auto insertion_index = inputs.next_insertion_index;
+auto root = inputs.current_nullifier_tree_root;
 
 // Check nothing exists where we would insert our subtree
 assert(membership_check(root, empty_subtree_hash, insertion_index >> subtree_depth, inputs.subtree_insertion_sibling_path));
 
 for (i in len(new_nullifiers)) {
-    let new_nullifier = inputs.new_nullifiers[i];
-    let low_nullifier_leaf_preimage = inputs.low_nullifier_leaf_preimages[i];
-    let low_nullifier_membership_witness = inputs.low_nullifier_membership_witnesses[i];
+    auto new_nullifier = inputs.new_nullifiers[i];
+    auto low_nullifier_leaf_preimage = inputs.low_nullifier_leaf_preimages[i];
+    auto low_nullifier_membership_witness = inputs.low_nullifier_membership_witnesses[i];
 
     if (low_nullifier_membership_witness is garbage) {
         bool matched = false;
 
         // Search for the low nullifier "optimistically" within our pending insertion subtree
         for (j in range(0, i)) {
-            let pending_nullifier = pending_insertion_subtree[j];
+            auto pending_nullifier = pending_insertion_subtree[j];
 
             if (pending_nullifier.is_garbage()) continue;
             if (pending_nullifier[j].value < new_nullifier && (pending_nullifier[j].next_value > new_nullifier || pending_nullifier[j].next_value == 0)) {
@@ -267,7 +267,7 @@ for (i in len(new_nullifiers)) {
                 matched = true;
 
                 // Update pointers
-                let new_nullifier_leaf = {
+                auto new_nullifier_leaf = {
                     .value = new_nullifier,
                     .next_index = pending_nullifier.next_index,
                     .next_value = pending_nullifier.next_value
@@ -294,7 +294,7 @@ for (i in len(new_nullifiers)) {
         assert(new_nullifier > low_nullifier_leaf_preimage.value);
 
         // Update new nullifier pointers
-        let new_nullifier_leaf = {
+        auto new_nullifier_leaf = {
             .value = new_nullifier,
             .next_index = low_nullifier_preimage.next_index,
             .next_value = low_nullifier_preimage.next_value
@@ -323,7 +323,8 @@ root = insert_subtree(root, inputs.next_insertion_index >> subtree_depth, pendin
 
 Despite offering large performance improvements within the circuits, these come at the expense of increased computation / storage performed by the node. To provide a non membership proof we must find the "low nullifier" for it. In a naive implementation this entails a brute force search against the existing nodes in the tree. This performance can be increased by the node maintaining a sorted data structure of existing nullifiers, increasing its storage footprint.
 
-**Closing Notes**
+#### Closing Notes
+
 We have been working with these new trees in order to reduce the proving time for our rollups in Aztec, however we think EVERY protocol leveraging nullifier trees should know about these trees as their performance benefit is considerable.
 
 ## Participate
