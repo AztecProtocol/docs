@@ -51,20 +51,23 @@ _For the remainder of this article I will refer to the node that provides the no
 
 The insertion protocol is described below:
 
-1. Look for a nullifier's corresponding low_nullifier, where $low_nullifier\_{\textsf{next_value}} > v$.
+1. Look for a nullifier's corresponding low_nullifier, where $low_nullifier_{\textsf{next_value}} > v$.
 2. Perform membership check of the low nullifier.
-3. Perform a range check on the low nullifier's value and next_value fields:
-   $new_nullifier > low_nullifier\_{\textsf{value}}$ && ( $new_nullifier < low_nullifier*{\textsf{next*value}}$ || $low_nullifier*{\textsf{next_value}} == 0$ )
+3. Perform a range check on the low nullifier's value and next_value fields:  
+$$
+$new\_nullifier > low\_nullifier\_{\textsf{value}}$ && ( $new\_nullifier < low\_nullifier_{\textsf{next\_value}}$ || $low\_nullifier_{\textsf{next\_value}} == 0$ )
+$$
 4. Update the low nullifier pointers
-
-- $low\_nullifier_{\textsf{next\_index}} = new\_insertion\_index$
-- $low\_nullifier_{\textsf{next\_value}} = new\_nullifier$
-
+$$
+$low\_nullifier_{\textsf{next\_index}} = new\_insertion\_index$
+$low\_nullifier_{\textsf{next\_value}} = new\_nullifier$
+$$
 5. Perform insertion of new updated low nullifier (yields new root)
 6. Update pointers on new leaf
-
-- $new\_nullifier\_leaf_{\textsf{value}} = new\_nullifier$
-- $new\_nullifier\_leaf.next\_value = low\_nullifier.next\_value$ (from before update in step 4)
+$$
+$new\_nullifier\_leaf_{\textsf{value}} = new\_nullifier$
+$new\_nullifier\_leaf_{\textsf{next\_value}} = low\_nullifier_{\textsf{next\_value}}$ (from before update in step 4)
+$$
 - $new\_nullifier\_leaf_{\textsf{next\_index}} = low\_nullifier_{\textsf{next\_index}}$ (from before update in step 4)
 
 7. Perform insertion of new leaf (yields new root)
