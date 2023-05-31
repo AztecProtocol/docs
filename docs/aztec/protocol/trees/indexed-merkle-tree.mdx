@@ -7,7 +7,7 @@ import Disclaimer from "../../common/_disclaimer.mdx";
 
 <Disclaimer />
 
-# Indexed Merkle Trees
+## Indexed Merkle Trees
 
 #### Primer on Nullifier Trees
 
@@ -25,7 +25,7 @@ A sparse merkle tree (not every leaf stores a value):
 
 In order to spend / modify a note in the private state tree, one must create a nullifier for it, and prove that the nullifier does not already exist in the nullifier tree. As nullifier trees are modelled as sparse merkle trees, non membership checks are (conceptually) trivial.
 
-Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain $2^{256}$ values and want to prove non membership of the value $2^{128}$. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] = 2^{128}$ I can prove that the item exists.
+Data is stored at the leaf index corresponding to its value. E.g. if I have a sparse tree that can contain $2^{256}$ values and want to prove non membership of the value $2^{128}$. I can prove via a merkle membership proof that $tree\_values[2^{128}] = 0$, conversely if I can prove that $tree\_values[2^{128}] == 1$ I can prove that the item exists.
 
 ## Problems introduced by using Sparse Merkle Trees for Nullifier Trees
 
@@ -51,10 +51,10 @@ _For the remainder of this article I will refer to the node that provides the no
 
 The insertion protocol is described below:
 
-1. Look for a nullifier's corresponding low*nullifier, where $low_nullifier*{\textsf{next_value}} > v$.
+1. Look for a nullifier's corresponding low_nullifier, where $low_nullifier\_{\textsf{next_value}} > v$.
 2. Perform membership check of the low nullifier.
-3. Perform a range check on the low nullifier's value and next*value fields:
-   $new_nullifier > low_nullifier*{\textsf{value}}$ && ( $new\_nullifier <  low\_nullifier_{\textsf{next\_value}}$ || $low\_nullifier_{\textsf{next\_value}} == 0$ )
+3. Perform a range check on the low nullifier's value and next_value fields:
+   $new_nullifier > low_nullifier\_{\textsf{value}}$ && ( $new_nullifier < low_nullifier*{\textsf{next*value}}$ || $low_nullifier*{\textsf{next_value}} == 0$ )
 4. Update the low nullifier pointers
 
 - $low\_nullifier_{\textsf{next\_index}} = new\_insertion\_index$
@@ -106,17 +106,17 @@ A further implementation detail is that we assume the first 0 node is pre-popula
 
 ### Non-membership proof
 
-Suppose we want to show that the value `20` doesn't exist in the tree. We just reveal the leaf which 'steps over' `20`. I.e. the leaf whose value is less than `20`, but whose nextVal is greater than `20`. Call this leaf the `loLeaf`.
+Suppose we want to show that the value `20` doesn't exist in the tree. We just reveal the leaf which 'steps over' `20`. I.e. the leaf whose value is less than `20`, but whose next value is greater than `20`. Call this leaf the `low_nullifier`.
 
-- hash the low leaf: `loLeaf = h(10, 1, 30)`.
+- hash the low nullifier: `low\_nullifier = h(10, 1, 30)`.
 - Prove the low leaf exists in the tree: `n` hashes.
-- Check the non leaf 'would have' belonged in the range given by the low leaf: `2` range checks.
-  - If (`loLeaf.nextInd == 0`):
-    - Special case, the low leaf is at the very end, so the non leaf must be higher than all values in the tree:
-    - `assert(loLeaf.val < nonLeaf.val)`
+- Check the new value 'would have' belonged in the range given by the low leaf: `2` range checks.
+  - If (`low_nullifier.next_index == 0`):
+    - Special case, the low leaf is at the very end, so the new_value must be higher than all values in the tree:
+    - `assert(low_nullifier.value < new_value.value)`
   - Else:
-    - `assert(loLeaf.val < nonLeaf.val)`
-    - `assert(loLeaf.nextVal > nonLeaf.val)`
+    - `assert(low_nullifier.value < low_nullifier.value)`
+    - `assert(low_nullifier.next_value > low_nullifier.value)`
 
 This is already a massive performance improvement, however we can go further, as this tree is not sparse. We can perform batch insertions.
 
@@ -138,23 +138,23 @@ In the following example we insert a subtree of size 4 into our tree at step 4. 
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-1.png")} />
 
-2. Update low nullifier for new nullifier 35.
+2. Update low nullifier for new nullifier $35$.
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-2.png")} />
 
-3. Update low nullifier for new nullifier 50. (Notice how the low nullifier exists within our pending insertion subtree, this becomes important later).
+3. Update low nullifier for new nullifier $50$. (Notice how the low nullifier exists within our pending insertion subtree, this becomes important later).
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-3.png")} />
 
-4. Update low nullifier for new nullifier 60.
+4. Update low nullifier for new nullifier $60$.
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-4.png")} />
 
-5. Update low nullifier for new nullifier 15.
+5. Update low nullifier for new nullifier $15$.
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-5.png")} />
 
-6. Update pointers for new nullifier 15.
+6. Update pointers for new nullifier $15$.
 
 <Image img={require("/img/indexed-merkle-tree/subtree-insert-6.png")} />
 
@@ -172,7 +172,7 @@ _I am ignoring range check constraint costs as they a negligible compared to the
 
 ## Performing subtree insertions in a circuit context
 
-Some fun engineering problems occur when we inserting a subtree in circuits when the low nullifier for a value exists within the subtree we are inserting. In this case we cannot perform a non membership check against the root of the tree, as our leaf that we would use for non membership has NOT yet been inserted into the tree. We need another protocol to handle such cases, we like to call these "optimistic" insertions.
+Some fun engineering problems occur when we inserting a subtree in circuits when the low nullifier for a value exists within the subtree we are inserting. In this case we cannot perform a non membership check against the root of the tree, as our leaf that we would use for non membership has NOT yet been inserted into the tree. We need another protocol to handle such cases, we like to call these "pending" insertions.
 
 **Circuit Inputs**
 
@@ -183,7 +183,7 @@ Some fun engineering problems occur when we inserting a subtree in circuits when
 - `next_insertion_index`: fr, the tip our nullifier tree
 - `subtree_insertion_sibling_path`: A sibling path to check our subtree against the root
 
-Protocol without optimistic insertion:
+Protocol without batched insertion:
 Before adding a nullifier to the pending insertion tree, we check for its non membership using the previously defined protocol by consuming the circuit inputs:
 Pseudocode:
 
@@ -231,11 +231,11 @@ root = insert_subtree(root, inputs.next_insertion_index >> subtree_depth, pendin
 
 ```
 
-From looking at the code above we can probably deduce why we need optimistic insertion. If the low nullifier does not yet exist in the tree, all of our membership checks will fail, we cannot produce a non membership proof.
+From looking at the code above we can probably deduce why we need pending insertion. If the low nullifier does not yet exist in the tree, all of our membership checks will fail, we cannot produce a non membership proof.
 
-To perform "optimistic" insertions, our circuit must keep track of all values that are pending insertion.
+To perform batched insertions, our circuit must keep track of all values that are pending insertion.
 
-- If the `low_nullifier_membership_witness` is identified to be nonsense ( all zeros, or has a leaf index of -1 ) we will know that this is an "optimistic" low nullifier read request and we will have to look within our "pending subtree" for the nearest low nullifier.
+- If the `low_nullifier_membership_witness` is identified to be nonsense ( all zeros, or has a leaf index of -1 ) we will know that this is an pending low nullifier read request and we will have to look within our pending subtree for the nearest low nullifier.
   - Loop back through all "pending_insertions"
     - If the pending insertion value is lower than the nullifier we are trying to insert
     - If the pending insertion value is NOT found, then out circuit is invalid and should self abort.
@@ -260,7 +260,7 @@ for (i in len(new_nullifiers)) {
     if (low_nullifier_membership_witness is garbage) {
         bool matched = false;
 
-        // Search for the low nullifier "optimistically" within our pending insertion subtree
+        // Search for the low nullifier within our pending insertion subtree
         for (j in range(0, i)) {
             auto pending_nullifier = pending_insertion_subtree[j];
 
