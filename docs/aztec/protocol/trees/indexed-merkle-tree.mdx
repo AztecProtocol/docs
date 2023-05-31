@@ -51,10 +51,15 @@ _For the remainder of this article I will refer to the node that provides the no
 
 The insertion protocol is described below:
 
-1. Look for a nullifier's corresponding low_nullifier, where:
+1. Look for a nullifier's corresponding low_nullifier where: 
 $$  
 low\_nullifier_{\textsf{next\_value}} > v
 $$
+> if $new\_nullifier$ is the largest use the leaf:
+$$
+low\_nullifier_{\textsf{next\_value}} == 0
+$$
+
 2. Perform membership check of the low nullifier.
 3. Perform a range check on the low nullifier's value and next_value fields:   
 
@@ -150,6 +155,12 @@ First we will go over batch insertions in an append only merkle tree.
 1. We then use the same sibling path the get the new root of the tree after we insert the subtree.
 
 In the following example we insert a subtree of size 4 into our tree at step 4. above. Our subtree is greyed out as it is "pending".
+
+**Legend**:
+- Green: Low Nullifier
+- Orange: New Inserted Value
+
+**Example**
 
 1. Prepare to insert subtree $[35,50,60,15]$
 
