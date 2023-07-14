@@ -22,8 +22,16 @@ We are building the [Aztec Network](https://aztec.network/), a fully programmabl
 - **Accessible.**: Proving transaction validity via recursively aggregation of zero-knowledge proofs, significantly reduces transaction costs.
 - **Compliant**: The programmable nature of Aztec smart contracts, enables dApp developers to code privacy-preserving audit and compliance checks into apps, while fully preserving a credible neutral protocol layer.
 
-#### _Zac Williamson, CEO and Co-founder, Aztec_
+---
 
-> “When we started Aztec, the technology to scale blockchains privately didn’t exist. Since then, we’ve assembled a team of world-class cryptographers who continuously redefine the state-of-the-art. Inventing PLONK — the paradigm-defining universal zk-SNARK — showcases our ability to produce technology that matches our ambitions: unlocking an entire universe of blockchain applications that couldn’t exist without privacy.”
+> _“_
+> _When we started Aztec, the technology to scale blockchains privately didn’t exist._
+> 
+> _Since then, we’ve assembled a team of world-class cryptographers who continuously redefine the state-of-the-art. Inventing PLONK — the paradigm-defining universal zk-SNARK — showcases our ability to produce technology that matches our ambitions: unlocking an entire universe of blockchain applications that couldn’t exist without privacy._
+> _”_
 
-To achieve these goals, we are pioneering the cryptography and research needed to bring our next generation, privacy-preserving zk-roll-up to mainnet.
+\- _Zac Williamson, CEO and Co-founder, Aztec_
+
+---
+
+To achieve these goals, we are pioneering the cryptography and research needed to bring our next generation, privacy-preserving zk-rollup to mainnet.

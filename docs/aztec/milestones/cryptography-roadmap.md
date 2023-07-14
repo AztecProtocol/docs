@@ -12,10 +12,15 @@ title: Cryptography Roadmap
 
 - Honk is a sumcheck-based zk-SNARK protocol with blazing-fast zk proof construction. We need to Honk allow users to prove correct execution of complicated, multi-step computations using recursion in a resource constraint environment like a cell phone. This is necessary for our mission, because we need to make sure our users' sensitive information never leaves their devices!
 - List of Honk projects
-  - Completed: basic Honk prover and verifier with respectable construction and verification speeds, but no optimization.
-  - Upcoming:
+  - Completed: 
+    - basic Honk prover and verifier with respectable construction and verification speeds, but no optimization.
     - Bringing "Ultra" functionality to Honk: lookup tables, efficient range constraints, RAM, ROM, and more will result in orders-of-magnitude improvements to Honk's prover times.
+  - Upcoming:
     - Recursion using cycles of curves will allow for efficient recursive verification of Honk proofs. Using this technique will lower the barrier to entry of our rollup providers, resulting in a more robust set of providers and greater security for the Aztec network.
+
+## Zeromorph
+
+[Zeromorph: Zero-Knowledge Multilinear-Evaluation Proofs from Homomorphic Univariate Commitments](https://eprint.iacr.org/2023/917.pdf). A way of zk-committing to multivariate polynomials.
 
 ## Goblin projects
 
@@ -24,4 +29,7 @@ title: Cryptography Roadmap
 Read more here. https://hackmd.io/@aztec-network/B19AA8812
 
 - List of Goblin projects
-  - Aside from some prototype code by Zac, we have not begun working on this yet.
+  - Upcoming:
+    - MVP of Goblin Plonk
+
+
