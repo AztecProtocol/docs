@@ -40,7 +40,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/AztecProtocol/docs/edit/main/",
+          editUrl: "https://github.com/AztecProtocol/docs/edit/pre-sandbox-docs/",
           routeBasePath: "/",
           remarkPlugins: [math],
           rehypePlugins: [katex],
