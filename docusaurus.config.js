@@ -81,11 +81,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [{ name: 'keywords', content: 'aztec, noir, privacy, encrypted, ethereum, blockchain' }],
-      algolia: {
-        appId: "CL4NK79B0W",
-        apiKey: "21d89dadaa37a4d1b6bf4b17978dcf7f",
-        indexName: "aztec",
-      },
+      // algolia: {
+      //   appId: "CL4NK79B0W",
+      //   apiKey: "21d89dadaa37a4d1b6bf4b17978dcf7f",
+      //   indexName: "aztec",
+      // },
       colorMode: {
         respectPrefersColorScheme: true,
       },
