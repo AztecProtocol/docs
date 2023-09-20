@@ -38,6 +38,9 @@ Aztec will be launched with a fully permissionless proving network that anyone c
 
 How this works will be discussed via a future RFP process on Discourse, similarly to the Sequencer RFP. 
 
+### Scalability
+Aztec aims to address the scalability challenge by utilizing zkSNARKs to achieve flexible encryption and improve scalability. Through the use of recursion and kernel circuits, Aztec expects to achieve a significant scalability improvement over Connect, targeting 100+ transactions per second (TPS) and single-digit cent transactions by mainnet launch. This represents approximately 5 times more throughput than Ethereum and 50-100 times more than Connect. Aztec also plans to reduce the cost of posting call data to Layer 1 through the use of blob transactions facilitated by EIP-4844.
+
 ### Misc
 
 For other definitions please see the [components](./aztec/components) section.
