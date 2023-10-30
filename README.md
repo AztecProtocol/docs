@@ -1,3 +1,7 @@
+**⚠️ This repository is now archived. ⚠️**
+
+To update the docs at https://docs.aztec.network, please submite a pull request to the aztec-packages repo [here](https://github.com/AztecProtocol/aztec-packages). The docs live in `./docs/`.
+
 
 # Aztec Network Documentation
 
